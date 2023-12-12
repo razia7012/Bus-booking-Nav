@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Bus Booking</title>
+    <style>
+        .navbar-custom{
+         background-color: #0C2340;
+        color: #ffffff;
+        }
+
+        #navbarNav{
+        padding-right:13%;
+        }
+
+       .nav-link {
+            color: #ffffff !important;
+        }
+
+        .nav-link:hover{
+        color:grey !important;}
+
+       .nav-item{
+       margin-right:8%;
+       width:180px;}
+
+
+
+         .background-section {
+            background-size: cover;
+            padding: 50px 0;
+            color: #ffffff;
+            text-align: center;
+        }
+
+      .content h1{
+      display: flex;justify-content:
+      center;align-items: center;
+      margin-top:5%;}
+
+     .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+    .footer{
+    background-color: #0C2340;
+    margin-top:5%;
+    height:5vh;}
+
+    .main-heading {
+        color: #ffffff;
+        font-size: 2rem;
+        margin-top: 20px;
+    }
+
+        .image-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .image-item {
+            width: 250px;
+            margin: 10px;
+            cursor:pointer;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+         .image-item:hover img
+         {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+        @media (max-width: 768px) {
+            .image-item {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light navbar-custom">
+    <a class="navbar-brand mx-2" href="#" style="font-style:italic;color:#ffffff;">Bus Booking</a>
+    <div class="collapse navbar-collapse justify-content-end mx-4" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'bus-list' %}">Buses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Search Buses</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">My Bookings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="main" style="background-image: url('{% static 'images/image3.jpg' %}');background-position:cover;height:60vh;width:100%;background-repeat:no-repeat;">
+
+</div>
+ <section>
+<div class="content">
+    <h1>Top Destinations</h1>
+    <p style="padding-left: 5%;padding-right: 5%;">Kerala, a state on India's tropical Malabar Coast, has nearly 600km of Arabian Sea shoreline. It's known for its palm-lined beaches and backwaters, a network of canals. Kerala, a state on India's tropical Malabar Coast, has nearly 600km of Arabian Sea shoreline.</p>
+    <div class="image-grid">
+        <div class="image-item">
+            <img src="{% static 'images/grid_image1.jpg' %}" alt="Image 1">
+        </div>
+        <div class="image-item">
+            <img src="{% static 'images/grid_image2.jpg' %}" alt="Image 2">
+        </div>
+                <div class="image-item">
+            <img src="{% static 'images/grid_image3.jpg' %}" alt="Image 3">
+        </div>
+        <div class="image-item">
+            <img src="{% static 'images/grid_image4.jpg' %}" alt="Image 4">
+        </div>
+
+    </div>
+</div>
+</section>
+
+  <div class="container">
+    <h2>Contact Us</h2>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" rows="4" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+<div class="footer">
+    <p style="color:white;margin:auto;text-align:center;">&copy; 2023 Online Bus Booking. All Rights Reserved.</p>
+  </div>
+
+
+
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+</body>
+</html>
