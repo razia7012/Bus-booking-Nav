@@ -1,0 +1,129 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Buses</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+
+
+
+      .book-now-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #E50A0A;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            padding: 10px 20px;
+        }
+
+      .book-now-btn:hover{
+            background:green;
+            }
+
+        .available-btn
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: green;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            padding: 10px 20px;
+            margin-bottom:10px;
+        }
+
+       .origin
+       {
+       position:relative;
+       left:41%;
+       color:green;
+       }
+
+       .destination
+       {
+       position:relative;
+       left:41%;
+       color:green;
+       }
+
+      .seats
+      {
+      color:#E50A0A;
+      padding-left:29px;
+      }
+
+      .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
+}
+
+
+    </style>
+</head>
+<body style="background-color:blue;">
+{% include 'header.html' %}
+<div class="container mt-4">
+    <div class="row">
+        {% for bus in buses %}
+            <div class="col-12 mb-4">
+                <div class="card bg-light hover-effect" style="border-radius: 10px;">
+                    <div class="card-body d-flex justify-content-between">
+                        <div class="left-end-section">
+                            <p class="origin">{{ bus.route.origin|upper}}</p>
+                            <ul>
+                                {% for schedule in bus.schedule_set.all %}
+                                    <p>{{ schedule.departure_time }}</p>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="left-section">
+                                <img src="{% static 'images/arrow.jpg' %}" alt="Image" width="30">
+                        </div>
+                        <div class="middle-section">
+                            <p class="destination">{{ bus.route.destination|upper }}</p>
+                            <ul>
+                                {% for schedule in bus.schedule_set.all %}
+                                <p>{{ schedule.arrival_time }}</p>
+                                {% endfor %}
+                            </ul>
+
+                        </div>
+                        <div class="right-section">
+                            <p class="seats">{{ bus.capacity }} seats left</p>
+                            <p style="padding-left:29px;">Price: {{ bus.price }}</p>
+                             <p style="color:red;">{{bus.bus_name|title}} {{ bus.bus_type }} cum sleeper</p>
+
+                        </div>
+                        <div class="right-end-section">
+                            <button class="available-btn">
+                                <span>{{bus.status}}</span>
+                            </button>
+                            <button class="book-now-btn">
+                                <span>Book Now</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% include 'footer.html' %}
+
+<!-- Add Bootstrap JS and Popper.js scripts (optional but recommended for certain Bootstrap features) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></p>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
