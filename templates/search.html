@@ -1,0 +1,216 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+        <style>
+
+    .book-now-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #E50A0A;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            padding: 10px 20px;
+            margin-top:31px;    }
+
+    .book-now-btn:hover{
+
+         background:green;
+    }
+
+     .available-btn{
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: green;
+            border: none;
+            height: 27px;
+            border-radius: 5px;
+            color: white;
+            padding: 0 10px;
+            margin-bottom:10px;
+            margin-left:11px;
+
+     }
+     .origin{
+           position:relative;
+           left:41%;
+           color:green;
+     }
+
+     .destination{
+           position:relative;
+           left:41%;
+           color:green;
+     }
+
+     .seats{
+          color:#E50A0A;
+          padding-left:29px;
+     }
+
+    .search-form {
+
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        width: 98%;
+        margin-left: 16px;
+   }
+
+    .group{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+}
+
+    h1 {
+        text-align: center;
+        color: #333;
+}
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555;
+}
+
+    input {
+        width: calc(100% - 16px);
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+}
+
+    .search_btn {
+        background-color: #E50A0A;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 40px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+}
+
+    .search_btn:hover {
+        background-color: #0056b3;
+}
+
+
+
+    </style>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+</head>
+<body>
+{% include 'header.html' %}
+<div class="content">
+     <form method="POST" action="{% url 'search' %}" class="search-form">
+     {% csrf_token %}
+         <div class="group">
+                <div class="form-group">
+                    <label for="source">Source:</label>
+                    <input type="text" name="source" id="source" value="{{ source }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="destination">Destination:</label>
+                    <input type="text" name="destination" id="destination" value="{{ destination }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="travel_date">Travel Date:</label>
+                    <input type="date" name="travel_date" id="travel_date" value="{{ travel_date | default:'' }}" required>
+                </div>
+
+                <button type="submit" class="search_btn">Search</button>
+             </div>
+
+</form>
+<div class="message" style="color:red;display:flex;align-items:centre;justify-content:center;">
+            {% if no_buses_message %}
+                <p>{{ no_buses_message }}</p>
+            {% else %}
+                <!-- Display the list of buses if available -->
+                {% for bus in buses %}
+                    <!-- Display bus details -->
+                {% endfor %}
+            {% endif %}
+    </div>
+
+
+    <div class="container mt-4">
+    <div class="row">
+        {% for bus in buses %}
+            <div class="col-12 mb-4">
+                <div class="card bg-light" style="border-radius: 10px;">
+                    <div class="card-body d-flex justify-content-between">
+                        <div class="left-end-section">
+                            <p class="origin">{{ bus.route.origin|upper}}</p>
+                            <ul>
+                                {% for schedule in bus.schedule_set.all %}
+                                    <p>{{ schedule.departure_time }}</p>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="left-section">
+                        </div>
+                        <div class="middle-section">
+                            <p class="destination">{{ bus.route.destination|upper }}</p>
+                            <ul>
+                                {% for schedule in bus.schedule_set.all %}
+                                <p>{{ schedule.arrival_time }}</p>
+                                {% endfor %}
+                            </ul>
+
+                        </div>
+                        <div class="right-section">
+                            <p class="seats">{{ bus.capacity }} seats left</p>
+                            <p style="padding-left:29px;">Price: {{ bus.price }}</p>
+                             <p style="color:red;">{{bus.bus_name|title}} {{ bus.bus_type }} cum sleeper</p>
+
+                        </div>
+                        <div class="right-end-section">
+                            <button class="available-btn">
+                                <span>{{bus.status}}</span>
+                            </button>
+                             {% for schedule in bus.schedule_set.all %}
+                                <button class="book-now-btn">
+                                        <span>Book Now</span>
+                                            </a>
+                                </button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+</div>
+
+{% include 'footer.html' %}
+<!-- Add Bootstrap JS and Popper.js scripts (optional but recommended for certain Bootstrap features) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></p>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></p>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+</body>
+</html>
