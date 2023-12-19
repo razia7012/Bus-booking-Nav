@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Bus
 # Create your views here.
@@ -7,12 +8,12 @@ from .models import Bus
 def home(request):
     return render(request,'home.html')
 
-
+@login_required
 def bus_list(request):
     buses = Bus.objects.all()
     return render(request, 'bus_list.html', {'buses': buses})
 
-
+@login_required()
 def search_buses(request):
     if request.method == 'POST':
         source = request.POST.get('source', '')

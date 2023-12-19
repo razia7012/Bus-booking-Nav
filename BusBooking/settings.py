@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app1'
+    'app1',
+    'account'
 ]
 
 MIDDLEWARE = [
@@ -121,5 +122,8 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
+
+LOGIN_URL = '/account/login/' #unauthenticated users will be redirected to login page while tring to access pages in app
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
